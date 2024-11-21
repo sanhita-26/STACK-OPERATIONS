@@ -1,0 +1,164 @@
+//C++ CODE
+#include <iostream>
+using namespace std;
+class Stack{
+    private:
+        int top;
+        int arr[5];
+    public:
+        Stack()
+        {
+            top=-1;
+            for(int i=0;i<=5;i++)
+            {
+                arr[i]=0;
+            }
+        }
+        bool isEmpty(){
+            if(top==-1)
+                return true;
+            else
+                return false;
+        }
+        bool isFull()
+        {
+            if(top==4)
+                return true;
+            else
+                return false;
+            
+        }
+        void push(int val)
+        {
+            if(isFull())
+            {
+                cout<<"STACK OVERFLOW"<<endl;
+            }
+            else{
+                top++;
+                arr[top]=val;
+            }
+        }
+        int pop()
+        {
+           if(isEmpty())
+           {
+               cout<<"STACK UNDERFLOW"<<endl;
+               return 0;
+           }
+           else
+           {
+               int popval=arr[top];
+               arr[top]=0;
+               top++;
+               return popval;
+           }
+        }
+        int count()
+        {
+            return(top+1);
+        }
+        int peek(int position)
+        {
+            if(isEmpty())
+            {
+               cout<<"STACK UNDERFLOW"<<endl;
+               return 0;
+            }
+            else{
+                return arr[position];
+            }
+        }
+        void change(int position,int val)
+        {
+            arr[position]=val;
+            cout<<"val changed"<<position<<endl;
+        }
+        void display() {
+            if (isEmpty()) {
+                cout << "Stack is empty!" << endl;
+                return;
+        }
+        cout << "Stack elements: ";
+        for (int i = 0; i <= top; i++) {
+            cout << arr[i] << " ";
+        }
+        cout << endl;
+    }
+        void clearScreen()
+        {
+            
+            cout << "\033[2J\033[H";  // ANSI escape sequence to clear the screen (works in most terminals)
+        }
+};
+int main() 
+{
+    Stack s;
+    int option,pos,value;
+    do
+    {
+        cout<<"SELECT OPTION NO TO PERFORM OPERATIONS";
+         cout << "1. Push" << endl;
+         cout << "2. Pop" << endl;
+         cout << "3. Check if empty" << endl;
+         cout << "4. Check if full" << endl;
+         cout << "5. Peek at a position" << endl;
+         cout << "6. Count" << endl;
+         cout << "7. Change element" << endl;
+         cout << "8. Display" << endl;
+         cout << "9. Clear screen" << endl;
+        cin>>option;
+        switch(option)
+        {
+            case 1:
+                cout<<"enter an item to push"<<endl;
+                cin>>value;
+                s.push(value);
+                break;
+            case 2:
+                cout<<"pop called....POPPED VAL"<<s.pop()<<endl;
+            case 3:
+                 if (s.isEmpty())
+                cout << "Stack is empty." << endl;
+            else
+                cout << "Stack is not empty." << endl;
+            break;
+            case 4:
+                 if (s.isFull())
+                cout << "Stack is full." << endl;
+            else
+                cout << "Stack is not full." << endl;
+            break;
+            case 5:
+            cout << "Enter position to peek: ";
+            cin >> pos;
+            value = s.peek(pos);
+            if (value != -1)
+                cout << "Element at position " << pos << ": " << value << endl;
+            break;
+            case 6:
+            cout << "Total count of elements in stack: " << s.count()<<endl;
+            break;
+            case 7:
+            cout << "Enter position to change element: ";
+            cin >> pos;
+            cout << "Enter new value: ";
+            cin >> value;
+            s.change(pos, value);
+            break;
+            case 8:
+            s.display();
+            break;
+            case 9:
+            s.clearScreen();
+            break;
+            case 10:
+            cout << "Exiting program..." << endl;
+            break;
+            default:
+            cout << "Invalid option!" << endl;
+        }
+    }while (option != 10);  // Loop until the user selects option 10 to exit
+
+    return 0;
+}
